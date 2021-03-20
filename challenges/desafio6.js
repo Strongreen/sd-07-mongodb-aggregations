@@ -1,4 +1,3 @@
-// Regex consultado na página: https://docs.mongodb.com/manual/reference/operator/query/regex/
 db.movies.aggregate([
   {
     $match: {

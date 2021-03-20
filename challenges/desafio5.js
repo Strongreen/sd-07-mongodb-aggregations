@@ -12,9 +12,11 @@ const trybeFavoriteArtists = [
 db.movies.aggregate([
   {
     $match: {
-      countries: "USA",
-      "tomatoes.viewer.rating": { $gte: 3 },
-      cast: { $exists: true },
+      $and: [
+        { countries: "USA" },
+        { "tomatoes.viewer.rating": { $gte: 3 } },
+        { cast: { $exists: true } },
+      ],
     },
   },
   {

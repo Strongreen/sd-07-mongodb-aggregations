@@ -11,7 +11,6 @@ db.movies.aggregate([
       title_split: { $size: 1 },
     },
   },
-  { $unwind: "$title_split" },
   { $sort: { title_split: 1 } },
   {
     $project: {

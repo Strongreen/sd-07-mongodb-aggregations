@@ -14,14 +14,7 @@ db.getCollection("air_alliances")
     {
       $unwind: "$union",
     },
-    { $match:
-      { $or:
-        [
-          { "union.airplane": "747" },
-          { "union.ariplane": "380" },
-        ],
-      },
-    },
+    { $match: { "union.airplane": { $in: ["747", "380"] } } },
     { $group:
       {
         _id: "$name",

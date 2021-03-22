@@ -7,9 +7,7 @@ db.movies.aggregate(
       ],
     },
   },
-  {
-    $unwind: "$cast",
-  },
+  { $unwind: "$cast" },
   {
     $match: {
       cast: {
@@ -30,11 +28,11 @@ db.movies.aggregate(
         rating: "$tomatoes.viewer.rating",
       },
       num_favs: {
-        $sum: 1
+        $sum: 1,
       },
     },
   },
-    {
+  {
     $sort: {
       num_favs: -1,
       "_id.rating": -1,
@@ -47,10 +45,6 @@ db.movies.aggregate(
       title: "$_id.title",
     },
   },
-  {
-    $skip: 24,
-  },
-  {
-    $limit: 1,
-  },
+  { $skip: 24 },
+  { $limit: 1 },
 );

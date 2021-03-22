@@ -4,6 +4,11 @@ db.getCollection("movies")
       $unwind: "$cast",
     },
     {
+      $match: {
+        languages: "English"
+      }
+    },
+    {
       $group: {
         _id: "$cast",
         numeroFilmes: { $sum: 1 },

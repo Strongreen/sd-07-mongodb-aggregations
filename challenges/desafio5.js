@@ -33,7 +33,7 @@ db.getCollection("movies")
     {
       $project: {
         _id: 0,
-        titulo: "$title",
+        title: "$title",
       },
     },
   ]);

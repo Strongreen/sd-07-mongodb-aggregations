@@ -23,6 +23,11 @@ db.getCollection("air_alliances")
       },
     },
     {
+      $sort: {
+        totalRotas: -1,
+      }
+    },
+    {
       $limit: 1,
     },
   ]);

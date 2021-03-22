@@ -12,7 +12,7 @@ db.getCollection("movies")
     },
     {
       $group: {
-        _id: 1,
+        _id: null,
         maior_rating: { $max: "$imdb.rating" },
         menor_rating: { $min: "$imdb.rating" },
         avg_rating: { $avg: "$imdb.rating" },

@@ -7,7 +7,7 @@ db.air_alliances.aggregate([
       pipeline: [
         {
           $match: {
-            $and:[
+            $and: [
               { $expr: { $eq: ["$airline.name", "$$airline"] } },
               { airplane: { $in: ["747", "380"] } },
             ],
@@ -17,7 +17,7 @@ db.air_alliances.aggregate([
       as: "airlineArray",
     },
   },
-  { $unwind: "$airlineArray"  },
+  { $unwind: "$airlineArray" },
   {
     $group: {
       _id: "$name",

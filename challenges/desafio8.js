@@ -3,13 +3,21 @@ db.air_alliances.aggregate([
   {
     $lookup: {
       from: "air_routes",
-      localField: "airlines",
-      foreignField: "airline.name",
-      as: "airlineRoutesArray",
+      let: { airline: "$airlines" },
+      pipeline: [
+        {
+          $match: {
+            $and:[
+              { $expr: { $eq: ["$airline.name", "$$airline"] } },
+              { airplane: { $in: ["747", "380"] } },
+            ],
+          },
+        },
+      ],
+      as: "airlineArray",
     },
   },
-  { $unwind: "$airlineRoutesArray" },
-  { $match: { "airlineRoutesArray.airplane": { $in: ["747", "380"] } } },
+  { $unwind: "$airlineArray"  },
   {
     $group: {
       _id: "$name",

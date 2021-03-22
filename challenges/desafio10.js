@@ -3,9 +3,14 @@ db.getCollection("trips")
     { $group: {
       _id: "$usertype",
       duracaoMedia:
-        { $avg:
-          { $subtract: ["$stopTime", "$startTime"] },
+      { $avg:
+        { $divide:
+          [
+            { $subtract: ["$stopTime", "$startTime"] },
+            1000 * 60 * 60,
+          ],
         },
+      },
     },
     },
     { $project: {

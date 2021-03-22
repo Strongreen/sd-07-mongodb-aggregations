@@ -1,3 +1,4 @@
+// DESENVOLVIDO COM AUXILIO DA VANESSA OLIVEIRA
 db.trips.aggregate([
   {
     $addFields: {

@@ -5,7 +5,9 @@ db.movies.aggregate([
     { rated: { $in: ["PG", "G"] } },
     { languages: { $in: ["English"] } },
     { languages: { $in: ["Spanish"] } },
-  ] } }, { $sort: { year: -1, "$imdb.rating": -1, title: 1 } }, {
+  ] } },
+  { $sort: { year: -1, "imdb.rating": -1, title: 1 } },
+  {
     $project: {
       _id: 0,
       titulo: "$title",

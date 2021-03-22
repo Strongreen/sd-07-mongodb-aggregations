@@ -18,13 +18,6 @@ db.trips.aggregate([
     },
   },
   {
-    $limit: 5,
-  },
-  {
-    $sort: {
-      _id: -1 },
-  },
-  {
     $project: {
       _id: 0,
       bikeId: "$_id",
@@ -32,5 +25,12 @@ db.trips.aggregate([
         $round: [{ $divide: ["$media", 60000] }, 0], // minuto para milessegundos
       },
     },
+  },
+  {
+    $sort: {
+      duracaoMedia: -1 },
+  },
+  {
+    $limit: 5,
   },
 ]);

@@ -27,4 +27,3 @@ db.movies.aggregate(
     },
   ],
 );
-// FEITO POR THADEU CASTELO BRANCO RAMOS

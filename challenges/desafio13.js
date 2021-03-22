@@ -1,3 +1,4 @@
+const minutes = 60 * 1000;
 db.trips.aggregate([
   { $match: {
     startTime: {

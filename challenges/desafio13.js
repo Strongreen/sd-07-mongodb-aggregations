@@ -1,4 +1,4 @@
-/* 
+/*
 https://stackoverflow.com/questions/19819870/date-query-with-isodate-in-mongodb-doesnt-seem-to-work/19820260
 */
 

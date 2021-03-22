@@ -5,12 +5,12 @@ const atores = [
   "Kevin Spacey",
   "George Clooney",
 ];
-
 db.movies.aggregate([
   {
     $match: {
       coutries: "USA",
       "tomatoes.viewer.rating": { $gte: 3 },
+      cast: { $exists: 1 },
     },
   },
   {
@@ -21,7 +21,6 @@ db.movies.aggregate([
         },
       },
     },
-
   },
   {
     $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 },

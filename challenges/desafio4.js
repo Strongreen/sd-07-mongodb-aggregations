@@ -1,4 +1,3 @@
-use("aggregations");
 db.movies.aggregate([
   { $sort: { title: 1 } },
   { $project: {

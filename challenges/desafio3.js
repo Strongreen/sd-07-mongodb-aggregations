@@ -1,8 +1,7 @@
-use("aggregations");
 db.movies.aggregate([
   { $match: {
     "imdb.rating": { $gte: 7 },
-    genres: { $not: { $in: ["Crime", "Horror"] }},
+    genres: { $not: { $in: ["Crime", "Horror"] } },
     $or: [
       { rated: "PG" },
       { rated: "G" },

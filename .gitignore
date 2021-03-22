@@ -11,3 +11,5 @@ assets/*/dump.tar.gz
 node_modules
 
 dataStructures.js
+
+/scripts/teste.sh

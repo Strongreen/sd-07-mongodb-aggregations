@@ -1,0 +1,3 @@
+db.trips.aggregate([
+  {},
+]);

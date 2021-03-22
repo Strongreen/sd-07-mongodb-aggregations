@@ -6,7 +6,8 @@ db.movies.aggregate([
   },
   {
     $group: {
-      _id: null,
+      _id: null, // a busca é feita pelo campo que eu coloco aquie
+      // SE EU COLOCANR NULLO BUSCO DA TABELA TODA
       maiorValor: {
         $max: "$imdb.rating",
       },

@@ -50,6 +50,7 @@ db.movies.aggregate([
     "$sort": { "titulo": 1 }
   }
 ]);
+
 db.movies.aggregate([
   {
     $match: {
@@ -76,6 +77,13 @@ db.movies.aggregate([
       notaIMDB: "$imdb.rating",
       votosIMDB: "$imdb.votes",
       ano: "$year",
-    }
+    },
+  },
+  {
+    $sort: {
+      ano: -1,
+      notaIMDB: -1,
+      titulo: 1,
+    },
   }
 ]);

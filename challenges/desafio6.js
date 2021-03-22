@@ -1,13 +1,8 @@
-// MongoDB Playground
-// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
-
-// The current database to use.
-use("aggregations");
 db.getCollection("movies")
   .aggregate([
     {
       $match: {
-        awards: { $regex: /^(Won )\d{1,2}\s\w{5,6}/ },
+        awards: { $regex: /^(Won )\d{1,2}\soscars?/i },
       },
     },
     {

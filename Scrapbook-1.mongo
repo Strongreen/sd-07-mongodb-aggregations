@@ -15,5 +15,14 @@ db.movies.aggregate([
         { languages: { $eq: "Spanish" } }
       ]
     },
+  },{
+    "$project": {
+      _id: 0,
+      titulo: "$title",
+      avaliacao: "$rated",
+      notaIMDB: "$imdb.rating",
+      votosIMDB: "$imdb.votes",
+      ano: "$year"
+    }
   }
 ]);

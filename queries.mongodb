@@ -7,7 +7,7 @@ db.movies.aggregate([
     $match: {
       "imdb.rating": { $gte: 7 },
       genres: { $nin: ["Crime", "Horror"] },
-      rated: { $in: ["PG", "G"] },
+      rated: { $in: ["pg", "G"] },
       languages: { $all: ["English", "Spanish"] },
     },
   },
@@ -23,7 +23,7 @@ db.movies.aggregate([
     $match: {
       "imdb.rating": { $gte: 7 },
       genres: { $nin: ["Crime", "Horror"] },
-      rated: { $in: ["PG", "G"] },
+      rated: { $in: ["pg", "G"] },
       languages: { $all: ["English", "Spanish"] },
     },
   },
@@ -50,7 +50,7 @@ db.movies.aggregate([
     $match: {
       "imdb.rating": { $gte: 7 },
       genres: { $nin: ["Crime", "Horror"] },
-      rated: { $in: ["PG", "G"] },
+      rated: { $in: ["pg", "G"] },
       languages: { $all: ["English", "Spanish"] },
     },
   },
@@ -103,7 +103,7 @@ db.movies.aggregate([
   },
   {
     $match: {
-      countries: "USA",
+      countries: "usa",
       "tomatoes.viewer.rating": { $gte: 3 },
       cast: { $exists: true },
     },
@@ -156,7 +156,6 @@ db.movies.aggregate([
 
 
 
-
 // ----------------------------------------- desafio 07
 
 
@@ -180,6 +179,36 @@ db.movies.aggregate([
     },
   },
   { $sort: { numeroFilmes: -1, _id: -1 } },
+]);
+
+// ----------------------------------------- desafio 08
+
+
+use("aggregations");
+db.air_alliances.aggregate([
+  {
+    $unwind: "$airlines",
+  },
+  {
+    $lookup: {
+      from: "air_routes",
+      localField: "airlines",
+      foreignField: "airline.name",
+      as: "routes",
+    },
+  },
+  {
+    $unwind: "$routes",
+  },
+  {
+    $match: {
+      "routes.airplane": { $in: ["747", "380"] },
+    },
+  },
+  { $group: { _id: "$name", totalRotas: { $sum: 1 } } },
+  { $sort: { totalRotas: -1 } },
+  { $project: { totalRotas: 1 } },
+  { $limit: 1 },
 ]);
 
 
@@ -337,11 +366,6 @@ db.trips.aggregate([
   { $sort: { duracaoMedia: -1 } },
   { $limit: 5 },
 ]);
-
-
-
-
-
 
 
 

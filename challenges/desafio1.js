@@ -1,3 +1,3 @@
-db.restaurants.aggregate(
-  [ { $match: { "imdb.rating": { $lt: 5 } } } ]
-)
+db.movies.aggregate(
+  [ { $match: { "imdb.rating": { $gte: 7 } } } ]
+);

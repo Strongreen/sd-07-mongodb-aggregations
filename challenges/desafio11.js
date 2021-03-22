@@ -4,9 +4,9 @@ db.trips.aggregate([
   } },
   { $group: {
     _id: "$diaDaSemana",
-    total: { $sum: 1 },
+    count: { $sum: 1 },
   } },
-  { $project: { diaDaSemana: "$_id", total: 1, _id: 0 } },
+  { $project: { diaDaSemana: "$_id", total: "$count", _id: 0 } },
   { $sort: { total: -1 } },
   { $limit: 1 },
 ]);

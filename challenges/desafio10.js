@@ -15,7 +15,7 @@ db.trips.aggregate([
       tipo: "$_id",
       duracaoMedia: {
         $round: [{
-          $divide: ["$duracaoMedia", 60 * 60 * 1000],
+          $divide: ["$duracaoMedia", 3600000],
         }, 2],
       },
     },

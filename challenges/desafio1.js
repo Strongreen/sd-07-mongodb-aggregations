@@ -1,5 +1,5 @@
 db.movies.aggregate(
-  {
+  [{
     $match: {
       $and: [
         { "imdb.rating": { $gte: 7 } },
@@ -8,5 +8,5 @@ db.movies.aggregate(
         { languages: { $all: ["English", "Spanish"] } },
       ],
     },
-  },
+  }],
 );

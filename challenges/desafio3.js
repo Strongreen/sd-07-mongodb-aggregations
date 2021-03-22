@@ -1,7 +1,5 @@
-// desafio 3
-use("aggregations");
 db.movies.aggregate(
-  {
+  [{
     $match: {
       $and: [
         { "imdb.rating": { $gte: 7 } },
@@ -27,5 +25,5 @@ db.movies.aggregate(
       notaIMDB: -1,
       titulo: 1,
     },
-  },
+  }],
 );

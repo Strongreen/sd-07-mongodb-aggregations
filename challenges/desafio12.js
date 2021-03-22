@@ -25,4 +25,5 @@ db.getCollection("trips")
         total: "$total",
       },
     },
+    { $limit: 1 }
   );

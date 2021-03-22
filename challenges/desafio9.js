@@ -1,5 +1,5 @@
 db.trips.aggregate([
-  { $match: { bisthYear: { $ne: " " } } },
+  { $match: { birthYear: { $ne: "" } } },
   { $group: {
     _id: null,
     maiorAnoNascimento: { $max: { $toInt: "$birthYear" } },

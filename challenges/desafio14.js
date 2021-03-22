@@ -21,6 +21,10 @@ db.trips.aggregate([
     $limit: 5,
   },
   {
+    $sort: {
+      _id: -1 },
+  },
+  {
     $project: {
       _id: 0,
       bikeId: "$_id",

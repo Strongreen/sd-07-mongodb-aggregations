@@ -13,22 +13,69 @@ db.movies.aggregate([
       $and: [
         { languages: { $eq: "English" } },
         { languages: { $eq: "Spanish" } }
-      ]
+      ],
     },
-  },{
-    "$project": {
+  },
+  {
+    $project: {
       _id: 0,
       titulo: "$title",
       avaliacao: "$rated",
       notaIMDB: "$imdb.rating",
       votosIMDB: "$imdb.votes",
-      ano: "$year"
-    }
-  },{
+      ano: "$year",
+    },
+  },
+  {
     $sort: {
-      "ano": -1,
-      "notaIMDB": -1,
-      "titulo": 1
-      }
+      ano: -1,
+      notaIMDB: -1,
+      titulo: 1,
+    },
+  },
+  {
+    $addFields: {
+      title_split: { $split:
+      [
+        "$titulo", " "
+      ]}
+    }
+  },
+  {
+    "$match": {
+      title_split: { $size: 1 }
+    }
+  },
+  {
+    "$sort": { "titulo": 1 }
+  }
+]);
+db.movies.aggregate([
+  {
+    $match: {
+      "imdb.rating": {
+        $gte: 7,
+      },
+      genres: {
+        $nin: ["Crime", "Horror"],
+      },
+      rated: {
+        $in: ["PG", "G"],
+      },
+      $and: [
+        { languages: { $eq: "English" } },
+        { languages: { $eq: "Spanish" } }
+      ],
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: "$title",
+      avaliado: "$rated",
+      notaIMDB: "$imdb.rating",
+      votosIMDB: "$imdb.votes",
+      ano: "$year",
+    }
   }
 ]);

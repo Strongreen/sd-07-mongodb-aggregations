@@ -1,0 +1,1 @@
+db.movies.aggregate([{$match: {imdb.rating: 7}}, {$group: { _id: "title"}}])

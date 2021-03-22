@@ -11,7 +11,7 @@ db.movies.aggregate([
     "tomatoes.viewer.rating": { $gte: 3 },
   },
   {
-    $addfilds: {
+    $addFields: {
       num_favs: { $size: { $setIntersection: ["$cast", [
         "Sandra Bullock",
         "Tom Hanks",

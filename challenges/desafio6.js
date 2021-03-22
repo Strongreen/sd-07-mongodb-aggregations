@@ -3,6 +3,7 @@ db.movies.aggregate([
     $match: {
       awards: {
         $regex: /Won.*Oscar/i,
+        // https://docs.mongodb.com/manual/reference/operator/query/regex/
       },
     },
   },

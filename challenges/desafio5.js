@@ -5,7 +5,6 @@ const favoriteCast = [
   "Kevin Spacey",
   "George Clooney",
 ];
-use("aggregations");
 db.movies.aggregate([
   { $match: {
     cast: { $in: favoriteCast },

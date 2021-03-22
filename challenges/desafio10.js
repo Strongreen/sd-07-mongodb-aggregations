@@ -1,5 +1,4 @@
 const hour = 60 * 60 * 1000;
-use("aggregations");
 db.trips.aggregate([
   { $group: {
     _id: "$usertype",

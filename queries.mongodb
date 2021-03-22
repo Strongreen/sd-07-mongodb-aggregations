@@ -87,6 +87,7 @@ db.movies.aggregate([
 
 // ----------------------------------------- desafio 05
 
+
 use("aggregations");
 db.movies.aggregate([
   {
@@ -123,14 +124,111 @@ db.movies.aggregate([
 ]);
 
 
-
-
-
-
-
-
-
 // ----------------------------------------- desafio 06
+
+
+use("aggregations");
+db.movies.aggregate([
+  {
+    $match: {
+      awards: { $regex: /Won [0-9]+ Oscar/ },
+    },
+  },
+  {
+    $group: {
+      _id: null,
+      maior_rating: { $max: "$imdb.rating" },
+      menor_rating: { $min: "$imdb.rating" },
+      media_rating: { $avg: "$imdb.rating" },
+      desvio_padrao: { $stdDevSamp: "$imdb.rating" },
+    },
+  },
+  {
+    $project: {
+      maior_rating: 1,
+      menor_rating: 1,
+      media_rating: { $round: ["$media_rating", 1] },
+      desvio_padrao: { $round: ["$desvio_padrao", 1] },
+      _id: 0,
+    },
+  },
+]);
+
+
+
+
+// ----------------------------------------- desafio 07
+
+
+use("aggregations");
+db.movies.aggregate([
+  {
+    $unwind: "$cast",
+  },
+  { $match: { languages: "English" } },
+  {
+    $group: {
+      _id: "$cast",
+      numeroFilmes: { $sum: 1 },
+      mediaIMDB: { $avg: "$imdb.rating" },
+    },
+  },
+  {
+    $project: {
+      numeroFilmes: 1,
+      mediaIMDB: { $round: ["$mediaIMDB", 1] },
+    },
+  },
+  { $sort: { numeroFilmes: -1, _id: -1 } },
+]);
+
+
+// ----------------------------------------- desafio 09
+
+
+use("aggregations");
+db.trips.aggregate([
+  {
+    $match: { birthYear: { $exists: true, $ne: "" } },
+  },
+  {
+    $group: {
+      _id: null,
+      maiorAnoNascimento: { $max: { $toInt: "$birthYear" } },
+      menorAnoNascimento: { $min: { $toInt: "$birthYear" } },
+    },
+  },
+  { $project: { _id: 0, maiorAnoNascimento: 1, menorAnoNascimento: 1 } },
+]);
+
+
+// ----------------------------------------- desafio 10
+
+
+use("aggregations");
+db.trips.aggregate([
+  {
+    $group: {
+      _id: "$usertype",
+      duracaoMedia: {
+        $avg: { $abs: { $subtract: ["$startTime", "$stopTime"] } },
+      },
+    },
+  },
+  {
+    $project: {
+      tipo: "$_id",
+      duracaoMedia: { $round: [{ $divide: ["$duracaoMedia", 3600000] }, 2] },
+      _id: 0
+    },
+  },
+  { $sort: { duracaoMedia: 1 } },
+]);
+
+
+
+
+
 
 
 use("aggregations");
@@ -147,20 +245,4 @@ db.movies.find();
 
 use("aggregations");
 db.trips.find();
-
-
-
-// ----------------------------------------- desafio 07
-
-
-
-
-// ----------------------------------------- desafio 08
-
-
-
-
-// ----------------------------------------- desafio 09
-
-
 

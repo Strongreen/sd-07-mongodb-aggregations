@@ -5,8 +5,8 @@ db.getCollection("movies")
     },
     {
       $match: {
-        languages: "English"
-      }
+        languages: "English",
+      },
     },
     {
       $group: {

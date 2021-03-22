@@ -8,15 +8,15 @@ db.getCollection("trips")
     },
     {
       $project: {
-        _id: 1,
-        duracaoD: { $divide: ["$duracaoM", 3600000] },
+        _id: 0,
+        tipo: "$_id",
+        duracaoMedia: { $round: [{ $divide: ["$duracaoM", 3600000] }, 2] },
       },
     },
     {
-      $project: {
-        _id: 0,
-        tipo: "$_id",
-        duracaoMedia: { $round: ["$duracaoD", 2] },
-      },
-    },
+      $sort: {
+        duracaoMedia: 1
+      }
+    }
   ]);
+

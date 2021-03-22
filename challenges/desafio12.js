@@ -7,19 +7,21 @@ db.getCollection("trips")
       },
     },
     {
+      $match: {
+        startDay: 5,
+      },
+    },
+    {
       $group: {
-        _id: {
-          day: "$startDay",
-          nomeEstacao: "$startStationName",
-        },
+        _id: "$startStationName",
         total: { $sum: 1 },
       },
     },
     { $sort: { total: -1 } },
-        {
+    {
       $project: {
         _id: 0,
-        nomeEstacao: "$_id.nomeEstacao",
+        nomeEstacao: "$_id",
         total: "$total",
       },
     },

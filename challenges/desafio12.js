@@ -25,5 +25,5 @@ db.getCollection("trips")
         total: "$total",
       },
     },
-    { $limit: 1 }
+    { $limit: 1 },
   );

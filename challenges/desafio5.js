@@ -1,5 +1,6 @@
-/* 
-stackoverflow.com/questions/24201120/mongodb-the-argument-to-size-must-be-an-array-but-was-of-type-eoo-missing
+/*
+stackoverflow.com/questions/24201120/
+mongodb-the-argument-to-size-must-be-an-array-but-was-of-type-eoo-missing
 
 https://docs.mongodb.com/manual/reference/operator/aggregation/ifNull/index.html
 */
@@ -28,7 +29,7 @@ db.movies.aggregate([
     $sort: {
       num_favs: -1,
       "tomatoes.viewer.rating": -1,
-      title: -1
+      title: -1,
     },
   },
   { $skip: 24 },

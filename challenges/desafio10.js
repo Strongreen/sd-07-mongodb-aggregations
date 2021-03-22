@@ -15,8 +15,7 @@ db.getCollection("trips")
     },
     {
       $sort: {
-        duracaoMedia: 1
-      }
-    }
+        duracaoMedia: 1,
+      },
+    },
   ]);
-

@@ -55,6 +55,68 @@ db.movies.aggregate([
     $limit: 1,
   }
 ]);
+// DESAFIO 6
+db.movies.aggregate([
+  {
+    "$match": {
+      year: {
+        $gte: 1991,
+        $lte: 1991,
+      },
+      title: "The Silence of the Lambs"
+    }
+  }
+]).pretty()
+db.movies.aggregate([
+  {
+    "$match": {
+      $and: [
+        { awards: { $regex: /^Won/i}},
+        { awards: { $regex: /Oscar/i}}
+      ]
+    }
+  },
+  {
+    "$group": {
+      _id: null,
+      "maior_rating": { $max: "$imdb.rating"},
+      "menor_rating": { $min: "$imdb.rating"},
+      "media_rating": { $avg: "$imdb.rating"},
+      "desvio_padrao": { $stdDevSamp: "$imdb.rating"}
+    }
+  },
+  {
+    "$project": {
+      _id: 0,
+       "maior_rating": 1,
+       "menor_rating": 1,
+       "media_rating": { $round: ["$media_rating", 1]},
+       "desvio_padrao": { $round: ["$desvio_padrao", 1]}
+    }
+  }
+])
+
+db.movies.aggregate([
+  {
+    "$match": {
+      $and: [
+        { awards: { $regex: /^Won/i}},
+        { awards: { $regex: /Oscar/i}}
+      ]
+    }
+  },
+  {
+    "$project": {
+      _id: 0,
+      awards: 1,
+      "imdb.rating": 1
+    }
+  },
+  {
+    "$sort": {"imdb.rating": -1}
+  }
+
+])
 
 
 // DESAFIO 7

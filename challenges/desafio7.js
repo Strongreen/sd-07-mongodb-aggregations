@@ -1,7 +1,7 @@
 db.movies.aggregate([
   {
     $match: {
-      languages: { $elemMatch: { $in: ["English", "$languages"] } },
+      languages: { $all: ["English"] },
     },
   },
   {
@@ -10,7 +10,7 @@ db.movies.aggregate([
   {
     $group: {
       _id: "$cast",
-      movies: { $addToSet: "$_id" },
+      movies: { $push: "$_id" },
       ratesIMDB: { $push: "$imdb.rating" },
     },
   },

@@ -17,9 +17,9 @@ db.movies.aggregate(
     {
       $project: {
         _id: 0,
-        maior_rating: 1,
-        menor_rating: 1,
-        media_rating: { $round: ["$media_rading", 1] },
+        maior_rating: "$maior_rating",
+        menor_rating: "$menor_rating",
+        media_rating: { $round: ["$media_rating", 1] },
         desvio_padrao: { $round: ["$desvio_padrao", 1] },
       },
     },

@@ -18,12 +18,12 @@ db.trips.aggregate([
     $project: {
       _id: 0,
       tipo: 1,
-      horas: { $round: ["$horas", 2] },
+      duracaoMedia: { $round: ["$horas", 2] },
     },
   },
   {
     $sort: {
-      horas: 1,
+      duracaoMedia: 1,
     },
   },
 ]);

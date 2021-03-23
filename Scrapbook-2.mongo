@@ -153,6 +153,10 @@ db.movies.aggregate([
     }
   }
 ])
+
+// DESAFIO 8
+
+
 // DESAFIO 9
 db.trips.findOne()
 db.trips.aggregate([
@@ -238,3 +242,57 @@ db.trips.aggregate([
   }
 ]);
 // DESAFIO 12
+
+// DESAFIO 13
+db.trips.aggregate([
+  {
+    "$match": {
+      "startTime": {
+        $gte: ISODate("2016-03-10")
+      }
+    }
+  },
+  {
+    "$group": {
+      _id: null,
+      duracaoMedia: {
+        $avg: {
+          $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 60000],
+        },
+      },
+    }
+  },
+    {
+    $project: {
+      _id: 0,
+      duracaoMediaEmMinutos: {
+        $ceil: "$duracaoMedia",
+      },
+    },
+  }
+])
+
+db.trips.aggregate([
+  {
+    $group: {
+      _id: "$usertype",
+      duracaoMedia: {
+        $avg: {
+          $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 3600000],
+        },
+      },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      tipo: "$_id",
+      duracaoMedia: {
+        $round: ["$duracaoMedia", 2],
+      },
+    },
+  },
+  {
+    $sort: { duracaoMedia: 1 },
+  },
+]);

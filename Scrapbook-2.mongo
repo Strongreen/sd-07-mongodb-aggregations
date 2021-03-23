@@ -1,25 +1,4 @@
-db.movies.createIndex({  })
-db.movies.aggregate([
-  {
-    "$project": {
-      imdb: 1,
-      _id: 0
-    }
-  }
-])
-
-db.movies.find()
-
-/**
- * [
-    "Sandra Bullock",
-    "William K.L. Dickson",
-    "Tom Hanks",
-    "Julia Roberts",
-    "Kevin Spacey",
-    "George Clooney",
-  ]
- */
+// DESAFIO 7
 db.movies.aggregate([
   {
     "$match": {
@@ -50,6 +29,30 @@ db.movies.aggregate([
     "$project": {
       mediaIMDB: { $round: ["$mediaIMDB", 1]},
       numeroFilmes: 1
+    }
+  }
+])
+// DESAFIO 9
+db.trips.findOne()
+db.trips.aggregate([
+  {
+    "$match": {
+      birthYear: {
+        $exists: true,
+        $ne: ""
+      }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      maiorAnoNascimento: { $max: { $toInt: "$birthYear"}},
+      menorAnoNascimento: { $min: { $toInt: "$birthYear"}}
+    }
+  },
+  {
+    "$project": {
+      _id: 0,
     }
   }
 ])

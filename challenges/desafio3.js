@@ -23,5 +23,5 @@ db.movies.aggregate([
       year: -1,
       title: 1,
     },
-  }
+  },
 ]);

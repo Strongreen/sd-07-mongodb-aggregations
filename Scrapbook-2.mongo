@@ -83,19 +83,37 @@ db.trips.aggregate([
     $sort: {duracaoMedia: 1}
   }
 ])
-
+// DESAFIO 11
+db.trips.findOne()
+// { $dayOfWeek: ISODate("1998-11-07T00:00:00Z") }
 db.trips.aggregate([
-{
-    "$project": {
-      dateDifference: {
-        $avg: {
-        $divide: [
-          {$subtract: ["$stopTime", "$startTime"]},
-          3600000
-          ]}}
+  {
+    "$addFields": {
+      diaDaSemana: {
+        $dayOfWeek: "$startTime"
+      }
     }
+  },
+  {
+    "$group": {
+      _id: "$diaDaSemana",
+      total: {
+        $sum: 1
+      }
+    }
+  },
+  {
+    "$project": {
+      _id: 0,
+      total: 1,
+      diaDaSemana: "$_id"
+      
+    }
+  }, 
+  {
+    "$sort": { total: -1 }
+  }, 
+  {
+    "$limit": 1
   }
 ])
-
-/**  
- */

@@ -4,7 +4,7 @@ db.movies.aggregate([
   {
     $group: {
       _id: null,
-      rating: { $push: "imdb.rating" },
+      rating: { $push: "$imdb.rating" },
     },
   },
   {

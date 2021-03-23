@@ -28,7 +28,6 @@ db.air_routes.aggregate([
               $in: ["$$alnName", "$airlines"],
             },
           },
-
         },
       ],
       as: "alliance",

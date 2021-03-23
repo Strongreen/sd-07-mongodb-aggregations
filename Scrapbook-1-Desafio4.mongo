@@ -101,26 +101,81 @@ db.movies.findOne()
 db.movies.aggregate([
   {
     "$addFields": {
-      castFavorit: [ "Sandra Bullock", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"]
+      newCast: {
+        $setIntersection: [
+           [ "Sandra Bullock", "William K.L. Dickson", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"], 
+           "$cast"
+        ]
+      }
     }
   },
   {
-    "$addFields": {
-      newCast: {
-        $setIntersection: [
-           "$castFavorit", "$cast"
-        ]
-      }
+    "$project": {
+      newCast: 1,
+      _id: 0
     }
   }
 ]).pretty()
 
-
-/**
+db.movies.aggregate([
   {
     "$match": {
-      cast: {
-        $in: [ "Sandra Bullock", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"]
+      "cast": {
+        $in: [ "Sandra Bullock", "William K.L. Dickson", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"]
+      },
+      countries: {
+        $eq: "USA"
+      },
+      "tomatoes.viewer.rating": {
+        $gte: 3
       }
     }
-  }, */
+  },
+  {
+    "$project": {
+      cast: 1,
+      _id: 0,
+      "tomatoes.viewer.rating": 1,
+      title: 1,
+      num_favs: { $size: { $setIntersection: [
+        [ "Sandra Bullock", "William K.L. Dickson", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"],
+        "$cast"]}}
+    }
+  },
+  {
+    $sort: { "num_favs": -1,
+    "tomatoes.viewer.rating": -1,
+    title: -1 }
+  }
+])
+
+db.movies.aggregate([
+    {
+    "$match": {
+      cast: { "$exists": true, $in: [ "Sandra Bullock", "William K.L. Dickson", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"]}}
+    },
+    {
+    "$addFields": {
+      num_favs: { $size: { $setIntersection: [
+        [ "Sandra Bullock", "William K.L. Dickson", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"],
+        "$cast"]}}
+    }
+  },
+  {
+    $sort: { "num_favs": -1,
+    "tomatoes.viewer.rating": -1,
+    title: -1 }
+  },
+  {
+    "$project": {
+      _id: 0,
+      title: 1,
+    }
+  },
+  {
+    "$limit": 1
+  }
+])
+
+db.movies.findOne(
+{ "$title": "The Heat" })

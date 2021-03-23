@@ -1,6 +1,6 @@
 db.movies.aggregate([
   // regex referência gitHub do Carlos8v https://github.com/carlos8v
-  { $match: { awards: { $regex: /Won \d Oscar/ } } }, 
+  { $match: { awards: { $regex: /Won \d Oscar/ } } },
   {
     $group: {
       _id: null,

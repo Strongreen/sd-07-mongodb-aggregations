@@ -15,10 +15,16 @@ db.trips.aggregate([
     },
   },
   {
+    $project: {
+      diaDaSemana: "$_id",
+      _id: 0,
+      total: "$total",
+    },
+  },
+  {
     $sort: {
-      diaDaSemana: -1,
+      total: -1,
     },
   },
   { $limit: 1 },
-  { $project: { diaDaSemana: "$_id", _id: 0, total: 1 } },
 ]);

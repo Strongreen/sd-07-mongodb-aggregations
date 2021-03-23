@@ -88,31 +88,32 @@ db.trips.findOne()
 // { $dayOfWeek: ISODate("1998-11-07T00:00:00Z") }
 db.trips.aggregate([
   {
-    "$addFields": {
+    $addFields: {
       diaDaSemana: {
-        $dayOfWeek: "$startTime"
-      }
-    }
+        $dayOfWeek: "$startTime",
+      },
+    },
   },
   {
-    "$group": {
+    $group: {
       _id: "$diaDaSemana",
       total: {
-        $sum: 1
-      }
-    }
+        $sum: 1,
+      },
+    },
   },
   {
-    "$project": {
+    $project: {
       _id: 0,
-      "diaDaSemana": "$_id",
-      "total": "$total"
-    }
-  }, 
+      diaDaSemana: "$_id",
+      total: "$total",
+    },
+  },
   {
-    "$sort": { total: -1 }
-  }, 
+    $sort: { total: -1 },
+  },
   {
-    "$limit": 1
+    $limit: 1,
   }
-])
+]);
+// DESAFIO 12

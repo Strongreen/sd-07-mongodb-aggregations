@@ -15,7 +15,7 @@ db.movies.aggregate([
     $addFields: { num_favs: { $size: "$num_favs" } },
   },
   { $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 } },
-  { $project: { title: 1, _id: 0} },
+  { $project: { title: 1, _id: 0 } },
   { $skip: 24 },
   { $limit: 1 },
 ]);

@@ -6,5 +6,14 @@ db.movies.aggregate([{
     languages: { $all: ["English", "Spanish"] },
   },
 },
-{ $count: "total" },
+{
+  $project: {
+    titulo: "$title",
+    avaliado: "$rated",
+    notaIMDB: "$imdb.rating",
+    votosIMDB: "$imdb.votes",
+    ano: "$year",
+    _id: 0,
+  },
+},
 ]);

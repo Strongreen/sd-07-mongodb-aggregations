@@ -2,7 +2,8 @@ db.movies.aggregate([
   { $match: {
     countries: "USA",
     "tomatoes.viewer.rating": { $gte: 3 },
-  } }, { $addFields: {
+  } },
+  { $addFields: {
     num_favs: {
       $let: {
         vars: {
@@ -14,4 +15,5 @@ db.movies.aggregate([
   } },
   { $match: { num_favs: { $ne: null } } },
   { $addFields: { num_favs: { $size: "$num_favs" } } },
-  { $project: { _id: 0, title: 1 } }, { $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 } }, { $skip: 24 }, { $limit: 1 }]);
+  { $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 } },
+  { $project: { _id: 0, title: 1 } }, { $skip: 24 }, { $limit: 1 }]);

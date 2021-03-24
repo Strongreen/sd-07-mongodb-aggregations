@@ -14,16 +14,16 @@ db.movies.aggregate([
     },
   },
   {
-    $project: {
-      _id: 0,
-      title_split: 1,
-    },
-  },
-  {
     $unwind: "$title_split",
   },
   {
     $sort: {
+      title_split: 1,
+    },
+  },
+  {
+    $project: {
+      _id: 0,
       title_split: 1,
     },
   },

@@ -19,7 +19,9 @@ db.movies.aggregate([
   },
   {
     $addFields: {
-      favoritoscoincidencia: { $setIntersection: ["$listaFavoritos", "$cast"] },
+      favoritoscoincidencia: {
+        $setIntersection: ["$listaFavoritos", "$cast"],
+      },
     },
   },
   {
@@ -39,5 +41,11 @@ db.movies.aggregate([
       _id: 0,
       title: 1,
     },
+  },
+  {
+    $skip: 24,
+  },
+  {
+    $limit: 1,
   },
 ]);

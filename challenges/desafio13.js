@@ -13,7 +13,9 @@ db.trips.aggregate([
       duracaoMediaEmMinutos: {
         $avg: {
           $divide: [
-            { $subtract: ["$stopTime", "$startTime"] }, 60000,
+            {
+              $subtract: ["$stopTime", "$startTime"],
+            }, 60000,
           ],
         },
       },

@@ -155,7 +155,110 @@ db.movies.aggregate([
 ])
 
 // DESAFIO 8
+db.air_alliances.aggregate([
+  {
+    $unwind: "$airlines"
+  },
+  {
+    "$lookup": {
+      from: "air_routes",
+      let: { local_airline: "$airlines", local_name: "$name"},
+      pipeline: [
+        {
+          "$match": {
+           $or: [
+             { "airplane": "747" },
+             {"airplane": "380"}
+           ]
+        }
+        },
+        {
+          $group: {
+            _id: { empresa: "$$local_name",
+                   rota: "$airline.name"},
+            total: { $sum: 1 }
+          }
+        }
+      ],
+      as: "rotas"
+    }
+  },
+  {
+    "$project": {
+      _id: 0,
+      "_id": "$rotas._id",
+      "totalRotas": "$rotas.total",
+    }
+  }
+])
+db.air_routes.aggregate([
+{
+    "$match": {
+      $or: [
+        { "airplane": "747" },
+        {"airplane": "380"}
+      ]
+    }
+  },
+  {
+    "$group": {
+      _id: "$airline.name",
+      total: {
+        $sum: 1
+      }
+    }
+  },
+  {
+    "$lookup": {
+      from: "air_alliances",
+      let: { local_air: "$airline.name", local_airplane: "$airplane" },
+      pipeline: [
+        {
+          $unwind: "$airlines"
+        },
+        {
+          $match: {
+            $expr: {
+              $eq: ["$$local_air", "$airlines"]
+            }
+          }
+        }
+      ],
+      as: "rotas"
+    }
+  }
+]).pretty()
+db.air_alliances.aggregate([
+  {
 
+  },
+  {
+    "$project": {
+      _id: 0,
+    }
+  }
+])
+db.air_routes.aggregate([
+  {
+    "$match": {
+      $or: [
+        { "airplane": "747" },
+        {"airplane": "380"}
+      ]
+    }
+  },
+  {
+    "$group": {
+      _id: "$airline.name",
+      total: {
+        $sum: 1
+      }
+    }
+  }
+]).pretty()
+db.air_alliances.find()
+db.air_routes.find()
+db.air_airlines.findOne()
 
 // DESAFIO 9
 db.trips.findOne()

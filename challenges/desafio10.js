@@ -27,4 +27,7 @@ db.trips.aggregate([
       },
     },
   },
+  {
+    $sort: { tipo: 1 },
+  },
 ]);

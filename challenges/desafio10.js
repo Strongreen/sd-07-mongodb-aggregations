@@ -1,3 +1,4 @@
+const convertMillisegundosHora = 1 * 60 * 60 * 1000;
 db.trips.aggregate([
   {
     $group: {
@@ -18,7 +19,7 @@ db.trips.aggregate([
       duracaoMedia: {
         $round: [{
           $divide: [
-            "$tempoMedio", 1 * 60 * 60 * 1000,
+            "$tempoMedio", convertMillisegundosHora,
           ],
         },
         2,

@@ -21,9 +21,11 @@ db.air_alliances.aggregate([
   {
     $group: {
       _id: "$name",
-      totalRoutes: { $sum: 1 },
+      totalRotas: { $sum: 1 },
     },
   },
-  { $sort: { totalRoutes: -1 } },
+  { $sort: { totalRotas: -1 } },
   { $limit: 1 },
 ]);
+
+

@@ -1,4 +1,4 @@
-db.getCollection.movies
+db.movies
   .aggregate([
     { $project: {
       title_split: {

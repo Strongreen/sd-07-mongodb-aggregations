@@ -1,4 +1,4 @@
-const convert = 1000 * 60 * 60
+const convert = 1000 * 60 * 60;
 db.trips.aggregate([
   {
     $group: {

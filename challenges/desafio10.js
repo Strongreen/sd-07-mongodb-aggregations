@@ -28,6 +28,6 @@ db.trips.aggregate([
     },
   },
   {
-    $sort: { tipo: 1 },
+    $sort: { duracaoMedia: 1 },
   },
 ]);

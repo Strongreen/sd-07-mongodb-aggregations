@@ -11,7 +11,7 @@ db.trips.aggregate([{
       estacao: "$startStationName",
       diaSemana: "$dia",
     },
-    count: { $sum: 1 },
+    qtde: { $sum: 1 },
   },
 },
 {

@@ -1,4 +1,3 @@
-use("aggregations");
 const converteMillisegundosMinutos = 1 * 60 * 1000;
 db.trips.aggregate([
   {

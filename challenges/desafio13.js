@@ -1,5 +1,5 @@
 use("aggregations");
-const convertMillisegundosMinutos = 1 * 60 * 1000;
+const converteMillisegundosMinutos = 1 * 60 * 1000;
 db.trips.aggregate([
   {
     $match: {
@@ -26,7 +26,7 @@ db.trips.aggregate([
       duracaoMediaEmMinutos: {
         $ceil: {
           $divide: [
-            "$tempoMedio", convertMillisegundosMinutos,
+            "$tempoMedio", converteMillisegundosMinutos,
           ],
         },
       },

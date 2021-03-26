@@ -1,8 +1,16 @@
+use("aggregations");
 const convertMillisegundosMinutos = 1 * 60 * 1000;
 db.trips.aggregate([
   {
+    $match: {
+      startTime: {
+        $gte: ISODate("2016-03-10"), $lt: ISODate("2016-03-11"),
+      },
+    },
+  },
+  {
     $group: {
-      _id: "$usertype",
+      _id: "$null",
       tempoMedio: {
         $avg: {
           $subtract: [
@@ -15,18 +23,13 @@ db.trips.aggregate([
   {
     $project: {
       _id: 0,
-      duracaoMedia: {
-        $round: [{
+      duracaoMediaEmMinutos: {
+        $ceil: {
           $divide: [
             "$tempoMedio", convertMillisegundosMinutos,
           ],
         },
-        2,
-        ],
       },
     },
   },
 ]);
-
-use("aggregate");
-db.trips.find();

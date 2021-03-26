@@ -20,7 +20,7 @@ db.trips.aggregate([
       _id: 0,
       bikeId: "$_id",
       duracaoMedia: {
-        $floor: "$duracaoMedia",
+        $ceil: "$duracaoMedia",
       },
     },
   },

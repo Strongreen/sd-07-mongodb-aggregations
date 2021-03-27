@@ -2,10 +2,7 @@ db.trips.aggregate([
   {
     $addFields: {
       startEnd: {
-        $subtract: [
-          "$stopTime",
-          "$startTime",
-        ],
+        $subtract: ["$stopTime", "$startTime"],
       },
     },
   },
@@ -14,10 +11,7 @@ db.trips.aggregate([
       _id: "$usertype",
       duracaoMedia: {
         $avg: {
-          $divide: [
-            "$startEnd",
-            3600000,
-          ],
+          $divide: ["$startEnd", 3600000],
         },
       },
     },

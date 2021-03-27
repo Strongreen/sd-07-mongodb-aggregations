@@ -1,5 +1,5 @@
 db.trips.aggregate([
-  { $match: { birthYear: { $ne: "" }, } },
+  { $match: { birthYear: { $ne: "" } } },
   {
     $addFields: {
       anoNascimento: { $toInt: "$birthYear" },

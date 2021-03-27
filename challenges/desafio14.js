@@ -20,4 +20,3 @@ db.trips.aggregate([
   { $sort: { duracaoMediaEmMinutos: -1 } },
   { $limit: 5 },
 ]).pretty();
-

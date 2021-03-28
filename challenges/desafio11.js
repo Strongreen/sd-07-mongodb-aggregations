@@ -2,7 +2,7 @@ db.trips.aggregate([{
   $match: {
     startTime: {
       $exists: true,
-    },    
+    },
   },
 },
 {

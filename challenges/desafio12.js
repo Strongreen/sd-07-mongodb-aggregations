@@ -15,7 +15,7 @@ db.trips.aggregate([{
 },
 {
   $group: {
-    _id: {dia: "$dia", estacao:"$startStationName"},
+    _id: { dia: "$dia", estacao: "$startStationName" },
     total: {
       $sum: 1,
     },

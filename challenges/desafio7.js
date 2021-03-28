@@ -27,5 +27,5 @@ db.movies.aggregate([
       numeroFilmes: -1,
       _id: -1,
     },
-  }  
+  },
 ]);

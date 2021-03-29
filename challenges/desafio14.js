@@ -14,9 +14,9 @@ db.trips.aggregate([
     $project: {
       _id: 0,
       bikeid: "$_id",
-      duracaoMediaEmMinutos: { $ceil: [{ $divide: ["$media", convert] }] },
+      duracaoMedia: { $ceil: [{ $divide: ["$media", convert] }] },
     },
   },
-  { $sort: { duracaoMediaEmMinutos: -1 } },
+  { $sort: { duracaoMedia: -1 } },
   { $limit: 5 },
 ]);

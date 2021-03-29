@@ -17,7 +17,7 @@ db.trips.aggregate([
   {
     $group: {
       _id: null,
-      duracaoMediaEmMinutos: { $avg: "$tempoMin",
+      duracaoMediaEmMinutos: { $avg: "$time",
       },
     },
   },

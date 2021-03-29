@@ -4,7 +4,27 @@ db.air_alliances.aggregate([
       from: "air_routes",
       localField: "airlines",
       foreignField: "airline.name",
-      as: "airs",
+      as: "airAliance",
     },
+  },
+  {
+    $unwind: "$airAliance",
+  },
+  {
+    $match: { "airAliance.airplane": { $in: ["747", "380"] } },
+  },
+  {
+    $group: {
+      _id: "$name",
+      totalRotas: {
+        $sum: 1,
+      },
+    },
+  },
+  {
+    $sort: { totalRotas: -1 },
+  },
+  {
+    $limit: 1,
   },
 ]);

@@ -3,7 +3,7 @@ db.trips.aggregate([
   {
     $group: {
       _id: "$usertype",
-      duracaoMedia: { $avg: { $divide: ["$flightTime", 3600000] } },
+      Media: { $avg: { $divide: ["$flightTime", 3600000] } },
     },
   },
   { $sort: { duracaoMedia: 1 } },

@@ -1,5 +1,12 @@
 db.trips.aggregate([
   {
+    $addFields: {
+      duracaoMs: {
+        $subtract: ["$stopTime", "$startTime"],
+      },
+    },
+  },
+  {
     $group: {
       _id: "$usertype",
       media: { $avg: { $subtract: ["$stopTime", "$startTime"] } },

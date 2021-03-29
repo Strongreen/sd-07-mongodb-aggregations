@@ -13,7 +13,7 @@ db.trips.aggregate([
     },
   },
   {
-    $sort: { duracaoMedia: 1 },
+    $sort: { duracaoMedia: -1 },
   },
   {
     $limit: 5,

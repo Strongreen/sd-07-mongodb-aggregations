@@ -34,5 +34,5 @@ db.trips.aggregate(
   },
   {
     $sort: { duracaoMedia: 1 },
-  }
+  },
 );

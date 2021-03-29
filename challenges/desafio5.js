@@ -9,7 +9,7 @@ const artists = [
 db.movies.aggregate([
   {
     $match: {
-      countries: "EUA",
+      countries: "USA",
       "tomatoes.viewer.rating": {
         $gte: 3,
       },

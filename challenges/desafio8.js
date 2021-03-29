@@ -8,7 +8,7 @@ db.air_alliances.aggregate([
       localField: "airlines",
       foreignField: "airline.name",
       as: "partner",
-    }
+    },
   },
   {
     $unwind: "$partner",
@@ -26,7 +26,7 @@ db.air_alliances.aggregate([
       totalRotas: {
         $sum: 1,
       },
-    }
+    },
   },
   {
     $sort: {

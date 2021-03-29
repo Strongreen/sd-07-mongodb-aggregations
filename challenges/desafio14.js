@@ -29,9 +29,10 @@ db.trips.aggregate([
         $ceil: {
           $divide: [
             "$duracaoMedia",
-            60000],
-          },
+            60000,
+          ],
         },
+      },
       _id: 0,
     },
   },

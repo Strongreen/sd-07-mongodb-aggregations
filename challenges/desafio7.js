@@ -1,10 +1,12 @@
 db.movies.aggregate([
   {
+    $unwind: "$cast",
+  },
+  {
     $match: {
       languages: { $all: ["English"] },
     },
   },
-  { $unwind: "$cast" },
   {
     $group: {
       _id: "$cast",
@@ -14,7 +16,7 @@ db.movies.aggregate([
   },
   {
     $project: {
-      _id: true,
+      _id: 1,
       numeroFilmes: "$numeroFilmes",
       mediaIMDB: { $round: ["$mediaIMDB", 1] },
     },

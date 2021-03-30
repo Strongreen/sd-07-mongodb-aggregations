@@ -1,7 +1,7 @@
 db.trips.aggregate([
   {
     $addFields: {
-      weekDay: { $dayOfWeek: "$startTime" }
+      weekDay: { $dayOfWeek: "$startTime" },
     },
   },
   {
@@ -17,7 +17,7 @@ db.trips.aggregate([
       _id: 0,
     },
   },
-  { 
+  {
     $sort: { total: -1 },
   },
   { $limit: 1 },

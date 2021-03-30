@@ -1,13 +1,13 @@
 db.trips.aggregate([
-  { 
+  {
     $addFields: {
       diaDaSemana: { $dayOfWeek: "$startTime" },
     },
   },
-  { 
+  {
     $match: { diaDaSemana: 5 },
   },
-  { 
+  {
     $group: {
       _id: "$startStationName",
       count: { $sum: 1 },

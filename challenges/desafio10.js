@@ -1,12 +1,19 @@
-/* Referencia Emanuelle Brasil */
-db.trips
-  .aggregate([
-    { $group: {
+/* Referencia VitorAmorims */
+db.trips.aggregate([
+  {
+    $group: {
       _id: "$usertype",
-      duracaoMedia: { $avg: { $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 3600000] } } } },
-    { $project: {
+      duracaoMedia: { $avg: { $subtract: ["$stopTime", "$startTime"] } },
+    },
+  },
+  {
+    $project: {
       _id: 0,
       tipo: "$_id",
-      duracaoMedia: { $round: ["$duracaoMedia", 2] },
-    } },
-  ]);
+      duracaoMedia: {
+        $round: [{ $multiply: [{ $divide: ["$duracaoMedia", 86400000] }, 24] }, 2],
+      },
+    },
+  },
+  { $sort: { duracaoMedia: 1 } },
+]);

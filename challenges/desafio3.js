@@ -5,10 +5,6 @@ db.movies.aggregate([
       genres: {
         $not: { $in: ["Crime", "Horror"] },
       },
-      // $or: [
-      //   {rated: "PG"},
-      //   {rated: "G"},
-      // ],
       rated: { $in: ["PG", "G"] },
       $and: [
         { languages: { $in: ["English"] } },

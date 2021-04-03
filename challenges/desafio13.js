@@ -5,4 +5,3 @@ db.trips.aggregate([
   { $group: { _id: null, duracaoMediaEmMinutos: { $avg: "$percent" } } },
   { $project: { _id: 0, duracaoMediaEmMinutos: { $ceil: "$duracaoMediaEmMinutos" } } }
 ]);
-  

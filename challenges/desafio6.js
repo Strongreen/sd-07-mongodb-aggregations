@@ -13,7 +13,7 @@ db.movies.aggregate([
       desvio_padrao: { $stdDevSamp: "$imdb.rating" },
     },
   },
-  { 
+  {
     $project: {
       maior_rating: 1,
       menor_rating: 1,

@@ -1,5 +1,3 @@
-use("aggregations");
-
 const favArtistas = [
   "Sandra Bullock",
   "Tom Hanks",

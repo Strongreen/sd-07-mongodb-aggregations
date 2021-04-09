@@ -9,18 +9,18 @@ db.movies.aggregate([
   {
     $group: {
       _id: null,
-      highest_rating: {
+      maior_rating: {
         $max: "$imdb.rating",
       },
-      lowerst_rating: {
+      menor_rating: {
         $min: "$imdb.rating",
       },
-      average_rating: {
+      media_rating: {
         $round: [{
           $avg: "$imdb.rating",
         }, 1],
       },
-      standard_deviation: {
+      desvio_padrao: {
         $round: [{
           $stdDevSamp: "$imdb.rating",
         }, 1],
@@ -28,10 +28,10 @@ db.movies.aggregate([
     },
     $project: {
       _id: 0,
-      highest_rating: 1,
-      lowerst_rating: 1,
-      average_rating: 1,
-      standard_deviation: 1,
+      maior_rating: 1,
+      menor_rating: 1,
+      media_rating: 1,
+      desvio_padrao: 1,
     },
   },
 ]);

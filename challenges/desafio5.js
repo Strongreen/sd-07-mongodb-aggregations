@@ -1,3 +1,5 @@
+// Ref: https://stackoverflow.com/questions/24201120/mongodb-the-argument-to-size-must-be-an-array-but-was-of-type-eoo-missing
+
 const favActors = [
   "Sandra Bullock",
   "Tom Hanks",
@@ -12,6 +14,7 @@ db.movies.aggregate([
       countries: "USA",
       "tomatoes.viewer.rating": { $gte: 3 },
     },
+    cast: { $exists: true },
   },
   {
     $addFields: {

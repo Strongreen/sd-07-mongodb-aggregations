@@ -16,22 +16,24 @@ db.movies.aggregate([
         $min: "$imdb.rating",
       },
       media_rating: {
-        $round: [{
-          $avg: "$imdb.rating",
-        }, 1],
+        $avg: "$imdb.rating",
       },
       desvio_padrao: {
-        $round: [{
-          $stdDevSamp: "$imdb.rating",
-        }, 1],
+        $stdDevSamp: "$imdb.rating",
       },
     },
+  },
+  {
     $project: {
       _id: 0,
       maior_rating: 1,
       menor_rating: 1,
-      media_rating: 1,
-      desvio_padrao: 1,
+      media_rating: {
+        $round: ["$media_rating", 1]
+      },
+      desvio_padrao: {
+        $round: ["$desvio_padrao", 1]
+      },
     },
-  },
+  }
 ]);

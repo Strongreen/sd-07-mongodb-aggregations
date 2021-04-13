@@ -1,4 +1,4 @@
-const challengeOne = [
+db.movies.aggregate([
   {
     $match: {
       "imdb.rating": { $gte: 7 },
@@ -10,6 +10,4 @@ const challengeOne = [
       ],
     },
   },
-];
-
-db.movies.aggregate(challengeOne);
+]);

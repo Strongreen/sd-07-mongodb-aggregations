@@ -11,5 +11,5 @@ db.trips.aggregate([
     nomeEstacao: "$_id",
     total: "$totalViagem",
   } },
-  { $limit: 1 }, 
+  { $limit: 1 },
 ]);

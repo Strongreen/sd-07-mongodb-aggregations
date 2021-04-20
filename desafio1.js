@@ -3,11 +3,11 @@ const challengeOne = [
     $match: {
       $and: [
         { "imdb.rating": { $gte: 7 },
-        genres: { $nin: ["Crime", "Horror"] } },
+          genres: { $nin: ["Crime", "Horror"] } },
         { rated: { $in: ["PG", "G"] } },
-          { languages: "English" },
-          { languages: "Spanish" },
-      ]
+        { languages: "English" },
+        { languages: "Spanish" },
+      ],
     },
   },
 ];

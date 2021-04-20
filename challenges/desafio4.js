@@ -1,11 +1,7 @@
 const challengeFour = [
   {
     $addFields: {
-<<<<<<< HEAD
       title_split: { $split: ["$title", " "] },
-=======
-      title_split: { $split: ["$title", " "] },
->>>>>>> f1dfd789aded572edfdd1f5c4224ff3ed96f9c95
     },
   },
   {

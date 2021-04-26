@@ -14,12 +14,12 @@ db.movies.aggregate([
   {
     $project: {
       _id: 1,
-      numerofilmes: { $round: ["$numero", 1] },
+      numeroFilmes: { $round: ["$numero", 1] },
       mediaIMDB: { $round: ["$media", 1] },
     },
   },
   { $sort: {
-    numerofilmes: -1,
+    numeroFilmes: -1,
     _id: -1,
   } },
 ]);

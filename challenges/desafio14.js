@@ -1,11 +1,6 @@
 db.trips.aggregate([
   {
     $set: {
-      data: { $concat: [
-        { $substr: [{ $dayOfMonth: "$startTime" }, 0, 2] }, "-",
-        { $substr: [{ $month: "$startTime" }, 0, 2] }, "-",
-        { $substr: [{ $year: "$startTime" }, 0, 4] },
-      ] },
       totalHourSpent: {
         $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 60000] },
     },
@@ -20,7 +15,7 @@ db.trips.aggregate([
     $project: {
       _id: 0,
       bikeId: "$_id",
-      duracaoMedia: { $round: "$soma" },
+      duracaoMedia: { $ceil: "$soma" },
     },
   },
   {

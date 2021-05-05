@@ -1,24 +1,21 @@
-db.air_alliances.aggregate([
-  {
-    $lookup: {
-      from: "air_routes",
-      localField: "airlines",
-      foreignField: "airline.name",
-      as: "routes_alliances",
-    },
-  },
-  { $unwind: "$routes_alliances" },
+db.trips.aggregate([
   {
     $match: {
-      "routes_alliances.airplane": { $in: ["747", "380"] },
+      birthYear: { $ne: "" },
     },
   },
   {
     $group: {
-      _id: "$name",
-      totalRotas: { $sum: 1 },
+      maiorAnoNascimento: { $max: { $toInt: "$birthYear" } },
+      menorAnoNascimento: { $min: { $toInt: "$birthYear" } },
+      _id: null,
     },
   },
-  { $sort: { totalRotas: -1 } },
-  { $limit: 1 },
+  {
+    $project: {
+      maiorAnoNascimento: 1,
+      menorAnoNascimento: 1,
+      _id: 0,
+    },
+  },
 ]);

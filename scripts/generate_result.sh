@@ -30,7 +30,7 @@ print_results() {
 # Print tests evaluation
 for entry in "$TRYBE_DIR/expected-results"/*
 do
-  # scripts/resetdb.sh "$DB_RESTORE_DIR"
+  scripts/resetdb.sh "$DB_RESTORE_DIR"
   # Get challenge name
   chName=$(echo "$(basename $entry)" | sed -e "s/.js//g")
   # Build path to results dir
@@ -57,4 +57,4 @@ do
   print_results
 done
 
-# scripts/resetdb.sh "$DB_RESTORE_DIR"
+scripts/resetdb.sh "$DB_RESTORE_DIR"

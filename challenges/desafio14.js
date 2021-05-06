@@ -1,14 +1,14 @@
-const convertToHours = 60 * 60 * 1000;
+const convertToMinutes = 60 * 1000;
 
 db.trips.aggregate([
   {
     $group: {
-      _id: "$usertype",
+      _id: "$bikeid",
       duracaoMedia: {
         $avg: {
           $divide: [
             { $subtract: ["$stopTime", "$startTime"] },
-            convertToHours,
+            convertToMinutes,
           ],
         },
       },
@@ -16,10 +16,11 @@ db.trips.aggregate([
   },
   {
     $project: {
-      tipo: "$_id",
-      duracaoMedia: { $round: ["$duracaoMedia", 2] },
+      bikeId: "$_id",
+      duracaoMedia: { $ceil: ["$duracaoMedia"] },
       _id: 0,
     },
   },
-  { $sort: { duracaoMedia: 1 } },
+  { $sort: { duracaoMedia: -1 } },
+  { $limit: 5 },
 ]);

@@ -8,7 +8,7 @@ db.trips.aggregate([
       _id: "$startStationName",
     },
   },
-  { $sort: { "count": -1 } },
+  { $sort: { count: -1 } },
   {
     $project: {
       nomeEstacao: "$_id",

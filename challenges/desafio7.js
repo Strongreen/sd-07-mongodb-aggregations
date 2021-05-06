@@ -15,7 +15,7 @@ db.movies.aggregate([
       numeroFilmes: {
         $sum: 1,
       },
-      totalIMDB:{
+      totalIMDB: {
         $sum: "$imdb.rating",
       },
     },

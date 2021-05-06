@@ -14,7 +14,7 @@ db.trips.aggregate([
         $avg: {
           $sum: {
             $divide: [
-              { $subtract: ["$stopTime", "$startTime",] }, 60000,
+              { $subtract: ["$stopTime", "$startTime"] }, 60000,
             ],
           },
         },

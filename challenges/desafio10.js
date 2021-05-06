@@ -2,7 +2,7 @@ db.trips.aggregate([
   {
     $addFields: {
       teste: {
-        $subtract: ["$stopTime", "$startTime"]
+        $subtract: ["$stopTime", "$startTime"],
       },
     },
   },

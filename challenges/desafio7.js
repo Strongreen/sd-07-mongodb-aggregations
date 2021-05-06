@@ -25,7 +25,7 @@ db.movies.aggregate([
       numeroFilmes: true,
       mediaIMDB: {
         $round: [
-          "$mediaIMDB", 2,
+          "$mediaIMDB", 1,
         ],
       },
     },
